@@ -122,7 +122,7 @@ hurt:
 |---|---|---|
 | reachable on layer 0 from the entry point | 54.1% | 97.8% |
 | reachable from the entry point over all layers | **100%** | 97.9% |
-| nodes no other node links to on layer 0 | **0** | 0.16% |
+| nodes no other node links to on layer 0 | **0** | 31 (0.16%) |
 | each query's true top 10, reachable on layer 0 from where its descent lands | **100%** | 97.4% |
 
 The heuristic keeps a link only if no kept neighbour is closer to the candidate. That
@@ -131,5 +131,5 @@ likely result is that layer 0 splits into regions that do not link to each other
 never starts on layer 0 at the entry point. It descends through the sparse upper layers
 first, and those land every query in the region that holds its neighbours: 100% of the
 true top 10 are reachable from there. Linking the M nearest keeps one big component, but
-it has 32 truly orphaned nodes with no incoming link. Measured from where queries land,
+it has 31 truly orphaned nodes with no incoming link. Measured from where queries land,
 2.6% of the true neighbours are unreachable, which caps its recall at 0.974 for any ef.
