@@ -181,3 +181,15 @@ def test_hnsw_cost_is_sublinear():
     per_query = h.n_dist / 20
     assert per_query < 4000 / 4
     assert math.isfinite(per_query)
+
+
+def test_hnsw_reachability_diagnostics_are_consistent():
+    x = data(600, 8)
+    h = HNSW(8, M=4, ef_construction=32).add(x)
+    l0, every = h.reachable_set(), h.reachable_set(all_levels=True)
+    assert l0 <= every and h.entry in l0
+    assert h.reachable_from_entry() == len(l0) / len(x)
+    assert 0.0 <= h.in_degree_zero() < 1.0
+    q = data(5, 8, seed=9)
+    for v in q:  # the descent ends on a real node, and the full search starts from it
+        assert 0 <= h.landing(v) < len(x)
