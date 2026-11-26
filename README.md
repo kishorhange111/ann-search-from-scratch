@@ -113,11 +113,23 @@ FAISS pinned to one OpenMP thread. The full table is in [results/bench.md](resul
 | 80 | 0.986 | 0.932 | 677 / 552 |
 
 The heuristic gives +0.05 to +0.13 recall at every ef, for 17–23% more distance
-evaluations. One measurement is **not yet explained**. Along layer-0 links from the entry
-point, only 54% of nodes are reachable with the heuristic, against 98% with M-nearest
-linking. That cannot bound recall: a search enters layer 0 wherever the descent through
-the upper layers lands. Yet the same check on synthetic low-rank data (8,000 vectors, M = 8)
-gives 100% with the heuristic and 99.6% without.
-The benchmark now records the reachability over all layers, the share of nodes with no
-incoming layer-0 link, how many of each query's true neighbours can be reached from its
-landing node, and the number of distinct vectors. A rerun will settle it.
+evaluations. Its graph also looks broken at first: along layer-0 links from the entry
+point, only 54% of nodes are reachable, against 98% with M-nearest linking. A diagnostic
+rerun ([results/diag](results/diag/hnsw_reachability.jsonl)) explains why that does not
+hurt:
+
+| on the same 20,000 vectors | heuristic | M nearest |
+|---|---|---|
+| reachable on layer 0 from the entry point | 54.1% | 97.8% |
+| reachable from the entry point over all layers | **100%** | 97.9% |
+| nodes no other node links to on layer 0 | **0** | 0.16% |
+| each query's true top 10, reachable on layer 0 from where its descent lands | **100%** | 97.4% |
+
+The heuristic keeps a link only if no kept neighbour is closer to the candidate. That
+removes the redundant links inside a cluster. SIFT is strongly clustered, so the most
+likely result is that layer 0 splits into regions that do not link to each other. That is harmless, because a search
+never starts on layer 0 at the entry point. It descends through the sparse upper layers
+first, and those land every query in the region that holds its neighbours: 100% of the
+true top 10 are reachable from there. Linking the M nearest keeps one big component, but
+it has 32 truly orphaned nodes with no incoming link. Measured from where queries land,
+2.6% of the true neighbours are unreachable, which caps its recall at 0.974 for any ef.
