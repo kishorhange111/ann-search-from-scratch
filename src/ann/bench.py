@@ -30,9 +30,34 @@ from .ivf import IVFPQ, Flat, IVFFlat
 URL = "http://ann-benchmarks.com/sift-128-euclidean.hdf5"
 
 
+MIRROR = "https://huggingface.co/datasets/open-vdb/sift-128-euclidean/resolve/main/"
+
+
+def _from_mirror(path):
+    """ann-benchmarks.com refuses some cloud IPs (HTTP 403). The open-vdb mirror on the
+    Hugging Face Hub has the same base/query split as parquet with an ``idx`` column."""
+    import h5py
+    import pandas as pd
+
+    arrays = {}
+    for split, f in (("train", "train/train-00001-of-00001.parquet"),
+                     ("test", "test/test-00001-of-00001.parquet")):  # fmt: skip
+        df = pd.read_parquet(MIRROR + f).sort_values("idx")
+        arrays[split] = np.stack(df["emb"].to_numpy()).astype(np.float32)
+    with h5py.File(path, "w") as h:
+        for k, v in arrays.items():
+            h[k] = v
+
+
 def load_sift(path):
     if not os.path.exists(path):
-        urllib.request.urlretrieve(URL, path)
+        try:
+            urllib.request.urlretrieve(URL, path)
+        except OSError as e:
+            print(f"{URL} failed ({e}); using the Hugging Face mirror", flush=True)
+            if os.path.exists(path):
+                os.remove(path)
+            _from_mirror(path)
     import h5py
 
     with h5py.File(path, "r") as f:
@@ -119,13 +144,25 @@ def main(argv=None):
             t = time.perf_counter()
             h = HNSW(128, M=8, ef_construction=64, heuristic=heur).add(Xa)
             build = time.perf_counter() - t
+            # Diagnostics: where on layer 0 does each query land, and can its true top-k be
+            # reached from there along layer-0 links alone?
+            hit = []
+            for q, g in zip(Q, gta, strict=True):
+                seen = h.reachable_set(h.landing(q))
+                hit.append(np.mean([int(j) in seen for j in g]))
+            diag = {
+                "reachable": h.reachable_from_entry(),
+                "reachable_all_levels": h.reachable_from_entry(all_levels=True),
+                "in_degree_zero": float(h.in_degree_zero()),
+                "truth_reachable_from_landing": float(np.mean(hit)),
+                "distinct_vectors": int(len(np.unique(Xa, axis=0))),
+            }
             for ef in (10, 20, 40, 80):
                 h.n_dist = 0
                 I, qps = timed_search(lambda q, e=ef, h=h: h.search(q, k, e), Q)
                 emit("hnsw_heuristic", index=f"HNSW8 {'heuristic' if heur else 'nearest-M'}",
                      param=f"ef={ef}", recall=recall(I, gta), qps=qps, build_s=build,
-                     dist_per_query=h.n_dist / len(Q), n=len(Xa),
-                     reachable=h.reachable_from_entry())  # fmt: skip
+                     dist_per_query=h.n_dist / len(Q), n=len(Xa), **diag)  # fmt: skip
     if "faiss" in secs:
         import faiss
 

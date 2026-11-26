@@ -1,0 +1,53 @@
+{"section": "flat", "index": "Flat", "param": "", "recall": 1.0, "qps": 1594.8765980020366, "bytes": 512}
+{"section": "ivf", "index": "IVF256,Flat", "param": "nprobe=1", "recall": 0.39139999999999997, "qps": 8340.479456129675, "bytes": 520, "build_s": 19.044191735}
+{"section": "ivf", "index": "IVF256,Flat", "param": "nprobe=2", "recall": 0.5638, "qps": 5937.343287535597, "bytes": 520, "build_s": 19.044191735}
+{"section": "ivf", "index": "IVF256,Flat", "param": "nprobe=4", "recall": 0.735, "qps": 3969.548513634112, "bytes": 520, "build_s": 19.044191735}
+{"section": "ivf", "index": "IVF256,Flat", "param": "nprobe=8", "recall": 0.872, "qps": 2139.9206276049754, "bytes": 520, "build_s": 19.044191735}
+{"section": "ivf", "index": "IVF256,Flat", "param": "nprobe=16", "recall": 0.9636, "qps": 1288.1819148446625, "bytes": 520, "build_s": 19.044191735}
+{"section": "ivf", "index": "IVF256,Flat", "param": "nprobe=32", "recall": 0.9952, "qps": 511.8722267332172, "bytes": 520, "build_s": 19.044191735}
+{"section": "ivf", "index": "IVF256,Flat", "param": "nprobe=64", "recall": 1.0, "qps": 283.8574809880933, "bytes": 520, "build_s": 19.044191735}
+{"section": "ivfpq", "index": "IVF256,PQ16", "param": "nprobe=4", "recall": 0.5554000000000001, "qps": 1082.663194949866, "bytes": 24, "build_s": 87.23380465000002, "opq_error": null}
+{"section": "ivfpq", "index": "IVF256,PQ16 + rerank", "param": "nprobe=4, rerank=100", "recall": 0.7348000000000001, "qps": 955.2585587069615, "bytes": 536, "build_s": 87.23380465000002, "opq_error": null}
+{"section": "ivfpq", "index": "IVF256,PQ16", "param": "nprobe=16", "recall": 0.63, "qps": 225.81325106842297, "bytes": 24, "build_s": 87.23380465000002, "opq_error": null}
+{"section": "ivfpq", "index": "IVF256,PQ16 + rerank", "param": "nprobe=16, rerank=100", "recall": 0.9594000000000001, "qps": 236.62383962260287, "bytes": 536, "build_s": 87.23380465000002, "opq_error": null}
+{"section": "ivfpq", "index": "IVF256,PQ16", "param": "nprobe=64", "recall": 0.6374, "qps": 81.26523551086727, "bytes": 24, "build_s": 87.23380465000002, "opq_error": null}
+{"section": "ivfpq", "index": "IVF256,PQ16 + rerank", "param": "nprobe=64, rerank=100", "recall": 0.9944000000000001, "qps": 71.2041345216165, "bytes": 536, "build_s": 87.23380465000002, "opq_error": null}
+{"section": "ivfpq", "index": "OPQ16,IVF256,PQ16", "param": "nprobe=4", "recall": 0.556, "qps": 1171.3773128945911, "bytes": 24, "build_s": 343.34558431199997, "opq_error": [10465.0712890625, 10260.810546875, 10193.3037109375, 10123.28125, 10110.7685546875, 10086.337890625, 10089.79296875, 10076.9462890625, 10065.314453125]}
+{"section": "ivfpq", "index": "OPQ16,IVF256,PQ16 + rerank", "param": "nprobe=4, rerank=100", "recall": 0.7338, "qps": 976.6882486121112, "bytes": 536, "build_s": 343.34558431199997, "opq_error": [10465.0712890625, 10260.810546875, 10193.3037109375, 10123.28125, 10110.7685546875, 10086.337890625, 10089.79296875, 10076.9462890625, 10065.314453125]}
+{"section": "ivfpq", "index": "OPQ16,IVF256,PQ16", "param": "nprobe=16", "recall": 0.6362000000000001, "qps": 310.379133406525, "bytes": 24, "build_s": 343.34558431199997, "opq_error": [10465.0712890625, 10260.810546875, 10193.3037109375, 10123.28125, 10110.7685546875, 10086.337890625, 10089.79296875, 10076.9462890625, 10065.314453125]}
+{"section": "ivfpq", "index": "OPQ16,IVF256,PQ16 + rerank", "param": "nprobe=16, rerank=100", "recall": 0.9618000000000001, "qps": 257.08083092758983, "bytes": 536, "build_s": 343.34558431199997, "opq_error": [10465.0712890625, 10260.810546875, 10193.3037109375, 10123.28125, 10110.7685546875, 10086.337890625, 10089.79296875, 10076.9462890625, 10065.314453125]}
+{"section": "ivfpq", "index": "OPQ16,IVF256,PQ16", "param": "nprobe=64", "recall": 0.645, "qps": 73.5646667116694, "bytes": 24, "build_s": 343.34558431199997, "opq_error": [10465.0712890625, 10260.810546875, 10193.3037109375, 10123.28125, 10110.7685546875, 10086.337890625, 10089.79296875, 10076.9462890625, 10065.314453125]}
+{"section": "ivfpq", "index": "OPQ16,IVF256,PQ16 + rerank", "param": "nprobe=64, rerank=100", "recall": 0.997, "qps": 76.95823885825807, "bytes": 536, "build_s": 343.34558431199997, "opq_error": [10465.0712890625, 10260.810546875, 10193.3037109375, 10123.28125, 10110.7685546875, 10086.337890625, 10089.79296875, 10076.9462890625, 10065.314453125]}
+{"section": "faiss", "index": "faiss IVF256,Flat", "param": "nprobe=1", "recall": 0.3866, "qps": 51391.11112606904}
+{"section": "faiss", "index": "faiss IVF256,Flat", "param": "nprobe=4", "recall": 0.7303999999999999, "qps": 22374.597206905164}
+{"section": "faiss", "index": "faiss IVF256,Flat", "param": "nprobe=16", "recall": 0.9574000000000001, "qps": 7687.599451586432}
+{"section": "faiss", "index": "faiss IVF256,Flat", "param": "nprobe=64", "recall": 1.0, "qps": 2081.020790309218}
+{"section": "faiss", "index": "faiss IVF256,PQ16", "param": "nprobe=4", "recall": 0.5586, "qps": 25552.326309299337}
+{"section": "faiss", "index": "faiss IVF256,PQ16", "param": "nprobe=16", "recall": 0.6346, "qps": 9535.90468366515}
+{"section": "faiss", "index": "faiss IVF256,PQ16", "param": "nprobe=64", "recall": 0.6422, "qps": 2586.325064851874}
+{"section": "faiss", "index": "faiss HNSW16", "param": "ef=10", "recall": 0.8032, "qps": 32341.45539407175, "build_s": 6.454823450000049}
+{"section": "faiss", "index": "faiss HNSW16", "param": "ef=20", "recall": 0.9162, "qps": 21846.968973368643, "build_s": 6.454823450000049}
+{"section": "faiss", "index": "faiss HNSW16", "param": "ef=40", "recall": 0.9716, "qps": 12328.467862393078, "build_s": 6.454823450000049}
+{"section": "faiss", "index": "faiss HNSW16", "param": "ef=80", "recall": 0.9952000000000001, "qps": 7085.545806822765, "build_s": 6.454823450000049}
+{"section": "faiss", "index": "faiss HNSW16", "param": "ef=160", "recall": 0.999, "qps": 3662.84673752703, "build_s": 6.454823450000049}
+{"section": "faiss", "index": "faiss HNSW16", "param": "ef=320", "recall": 0.9994000000000001, "qps": 2145.5801998383718, "build_s": 6.454823450000049}
+{"section": "hnswlib", "index": "hnswlib M=16", "param": "ef=10", "recall": 0.8068, "qps": 37497.60765270771, "build_s": 7.709414895000009}
+{"section": "hnswlib", "index": "hnswlib M=16", "param": "ef=20", "recall": 0.9184000000000001, "qps": 18194.436519726463, "build_s": 7.709414895000009}
+{"section": "hnswlib", "index": "hnswlib M=16", "param": "ef=40", "recall": 0.9752000000000001, "qps": 14031.56338446792, "build_s": 7.709414895000009}
+{"section": "hnswlib", "index": "hnswlib M=16", "param": "ef=80", "recall": 0.9952000000000001, "qps": 8252.658643503433, "build_s": 7.709414895000009}
+{"section": "hnswlib", "index": "hnswlib M=16", "param": "ef=160", "recall": 0.9986, "qps": 4304.133814071148, "build_s": 7.709414895000009}
+{"section": "hnswlib", "index": "hnswlib M=16", "param": "ef=320", "recall": 0.9992000000000001, "qps": 2455.0443449990926, "build_s": 7.709414895000009}
+{"section": "hnsw", "index": "HNSW16", "param": "ef=10", "recall": 0.8442000000000001, "qps": 1820.5269945758305, "bytes": 619.34816, "build_s": 412.429713588, "dist_per_query": 330.236}
+{"section": "hnsw", "index": "HNSW16", "param": "ef=20", "recall": 0.9392, "qps": 1202.9227201619535, "bytes": 619.34816, "build_s": 412.429713588, "dist_per_query": 484.536}
+{"section": "hnsw", "index": "HNSW16", "param": "ef=40", "recall": 0.9828, "qps": 795.0806667220594, "bytes": 619.34816, "build_s": 412.429713588, "dist_per_query": 755.508}
+{"section": "hnsw", "index": "HNSW16", "param": "ef=80", "recall": 0.9972000000000001, "qps": 357.6074472002605, "bytes": 619.34816, "build_s": 412.429713588, "dist_per_query": 1224.234}
+{"section": "hnsw", "index": "HNSW16", "param": "ef=160", "recall": 0.9994000000000001, "qps": 179.48790161762625, "bytes": 619.34816, "build_s": 412.429713588, "dist_per_query": 1991.61}
+{"section": "hnsw", "index": "HNSW16", "param": "ef=320", "recall": 0.9996, "qps": 137.18121083959957, "bytes": 619.34816, "build_s": 412.429713588, "dist_per_query": 3188.362}
+{"section": "hnsw_heuristic", "index": "HNSW8 heuristic", "param": "ef=10", "recall": 0.7634000000000001, "qps": 1999.6656878915958, "build_s": 70.27219522199994, "dist_per_query": 185.206, "n": 20000, "reachable": 0.54115}
+{"section": "hnsw_heuristic", "index": "HNSW8 heuristic", "param": "ef=20", "recall": 0.8816000000000002, "qps": 1429.8609057341573, "build_s": 70.27219522199994, "dist_per_query": 267.166, "n": 20000, "reachable": 0.54115}
+{"section": "hnsw_heuristic", "index": "HNSW8 heuristic", "param": "ef=40", "recall": 0.9572, "qps": 905.6037435659783, "build_s": 70.27219522199994, "dist_per_query": 415.674, "n": 20000, "reachable": 0.54115}
+{"section": "hnsw_heuristic", "index": "HNSW8 heuristic", "param": "ef=80", "recall": 0.9858, "qps": 342.64816428710645, "build_s": 70.27219522199994, "dist_per_query": 677.2, "n": 20000, "reachable": 0.54115}
+{"section": "hnsw_heuristic", "index": "HNSW8 nearest-M", "param": "ef=10", "recall": 0.632, "qps": 1972.8262206162153, "build_s": 33.57012540400001, "dist_per_query": 157.97, "n": 20000, "reachable": 0.9784}
+{"section": "hnsw_heuristic", "index": "HNSW8 nearest-M", "param": "ef=20", "recall": 0.7636000000000001, "qps": 1501.6312505588528, "build_s": 33.57012540400001, "dist_per_query": 226.482, "n": 20000, "reachable": 0.9784}
+{"section": "hnsw_heuristic", "index": "HNSW8 nearest-M", "param": "ef=40", "recall": 0.8612000000000001, "qps": 968.0277172513888, "build_s": 33.57012540400001, "dist_per_query": 343.668, "n": 20000, "reachable": 0.9784}
+{"section": "hnsw_heuristic", "index": "HNSW8 nearest-M", "param": "ef=80", "recall": 0.9316, "qps": 574.3143995505745, "build_s": 33.57012540400001, "dist_per_query": 551.516, "n": 20000, "reachable": 0.9784}

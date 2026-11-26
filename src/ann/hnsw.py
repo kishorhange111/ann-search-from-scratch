@@ -150,12 +150,34 @@ class HNSW:
         links = sum(len(level) for node in self.links for level in node)
         return self.dim * 4 + 4 * links / max(1, len(self.links))
 
-    def reachable_from_entry(self):
-        """Fraction of nodes reachable from the entry point along layer-0 links."""
-        seen, stack = {self.entry}, [self.entry]
+    def reachable_set(self, start=None, all_levels=False):
+        """Nodes reachable from ``start`` (default: the entry point) along directed links,
+        on layer 0 only or on every layer."""
+        start = self.entry if start is None else start
+        seen, stack = {start}, [start]
         while stack:
-            for n in self.links[stack.pop()][0]:
-                if n not in seen:
-                    seen.add(n)
-                    stack.append(n)
-        return len(seen) / len(self.links)
+            node = self.links[stack.pop()]
+            for level in node if all_levels else node[:1]:
+                for n in level:
+                    if n not in seen:
+                        seen.add(n)
+                        stack.append(n)
+        return seen
+
+    def reachable_from_entry(self, all_levels=False):
+        """Fraction of nodes reachable from the entry point."""
+        return len(self.reachable_set(all_levels=all_levels)) / len(self.links)
+
+    def landing(self, q):
+        """The layer-0 node where the greedy descent for ``q`` starts its beam search."""
+        q, ep = np.asarray(q, np.float32), [self.entry]
+        for level in range(self.max_level, 0, -1):
+            ep = [self._search_layer(q, ep, 1, level)[0][1]]
+        return ep[0]
+
+    def in_degree_zero(self):
+        """Fraction of nodes that no other node links to on layer 0."""
+        has_in = np.zeros(len(self.links), bool)
+        for node in self.links:
+            has_in[node[0]] = True
+        return 1 - has_in.mean()
